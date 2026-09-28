@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="referrer" content="no-referrer">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="藥品反查">
+<title>藥品反查</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<form id="gate" class="gate" autocomplete="on">
+  <h1>💊 藥品反查</h1>
+  <p>請輸入密碼</p>
+  <input id="pw" type="password" autocomplete="current-password" autofocus required>
+  <label class="rem"><input id="rem" type="checkbox" checked>在這台裝置記住，下次免輸入</label>
+  <button id="go" type="submit">開啟</button>
+  <div class="err" id="err"></div>
+</form>
+
+<div id="app" hidden>
+  <header class="top">
+    <b>💊 藥品反查</b>
+    <nav class="tabs" role="tablist">
+      <button data-tab="look" class="on" role="tab">🎨 外觀反查</button>
+      <button data-tab="name" role="tab">🔎 名稱查詢</button>
+      <button data-tab="own" role="tab" id="tab-own" hidden>⭐ 本院藥品</button>
+    </nav>
+    <span class="meta" id="meta"></span>
+    <button class="ghost" id="logout" title="清除這台裝置記住的密碼">登出</button>
+  </header>
+
+  <main>
+    <section id="p-look" class="panel">
+      <div class="filters">
+        <div class="frow"><b>刻字</b>
+          <input id="imp" class="txt" placeholder="例：FY、GL 5（空白與符號不用打，打一部分也行）" autocomplete="off">
+        </div>
+        <div class="frow"><b>顏色</b><div class="chips" id="f-col"></div></div>
+        <div class="frow"><b>形狀</b><div class="chips" id="f-shp"></div></div>
+        <div class="frow"><b>刻痕</b><div class="chips" id="f-scr"></div>
+          <button class="ghost small" id="clear">清除條件</button>
+        </div>
+      </div>
+      <p class="hint" id="look-hint">點顏色、形狀，或打刻字就會出現候選藥。只打刻字時會忽略其他條件。</p>
+      <div class="count" id="look-count"></div>
+      <div class="grid" id="look-res"></div>
+      <button class="more" id="look-more" hidden>顯示更多</button>
+    </section>
+
+    <section id="p-name" class="panel" hidden>
+      <div class="filters">
+        <div class="frow"><b>查詢</b>
+          <input id="q" class="txt wide" placeholder="商品名、學名、健保碼或許可證字號，例：metformin、脈優、BC25814100" autocomplete="off">
+        </div>
+      </div>
+      <div class="count" id="name-count"></div>
+      <div class="grid" id="name-res"></div>
+      <button class="more" id="name-more" hidden>顯示更多</button>
+    </section>
+
+    <section id="p-own" class="panel" hidden>
+      <div class="filters">
+        <div class="frow"><b>篩選</b><input id="oq" class="txt wide" placeholder="在本院藥品裡找" autocomplete="off"></div>
+      </div>
+      <div class="count" id="own-count"></div>
+      <div class="grid" id="own-res"></div>
+      <button class="more" id="own-more" hidden>顯示更多</button>
+    </section>
+  </main>
+
+  <footer class="foot" id="foot"></footer>
+</div>
+
+<dialog id="dlg">
+  <button class="x" id="dlg-x" aria-label="關閉">✕</button>
+  <div id="dlg-body"></div>
+</dialog>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
